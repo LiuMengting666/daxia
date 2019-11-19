@@ -27,19 +27,12 @@ Created on Wed Nov 13 17:08:35 2019
 """
 from numpy import NaN
 import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.colors import ListedColormap
-from sklearn import neighbors, datasets
-from sklearn import preprocessing
+from sklearn import neighbors
 from sklearn import model_selection
-from sklearn.metrics import confusion_matrix 
-from sklearn.metrics import classification_report
-import itertools
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.model_selection import train_test_split,KFold
+from sklearn.model_selection import KFold
 from sklearn.metrics import accuracy_score
-import pandas as pd
-from sklearn import decomposition
+
 def init_data():
     data = np.loadtxt(r'C:\Users\10104\Desktop\\mean_train.csv',delimiter=',')
     data2 = np.loadtxt(r'C:\Users\10104\Desktop\\mean_test.csv',delimiter=',')
@@ -47,7 +40,7 @@ def init_data():
     classLabels=classLabels.ravel()
     return dataMatIn,classLabels,data2
 
-
+#这是对确实数据的处理
 # =============================================================================
 # train_df = pd.read_csv('train.csv',header=None)
 # test_df = pd.read_csv('test.csv',header=None)
@@ -86,20 +79,7 @@ X_train,y_train,data2= init_data()
 X_train,X_test,y_train,y_test=model_selection.train_test_split(X_train,y_train,test_size=0.20,random_state=5)
 h = .02
 
-# =============================================================================
-# X_train[:,3] = X_train[:,3]*1.9
-# X_train[:,5] = X_train[:,5]*1.9
-# X_train[:,0] = X_train[:,0]*0.8
-# X_train[:,9] = X_train[:,9]*0.9
-# =============================================================================
 
-
-
-# =============================================================================
-# X_train[:,3] = X_train[:,3]*1.7
-# X_train[:,5] = X_train[:,5]*0.5
-# X_train[:,0] = X_train[:,0]*2
-# =============================================================================
 X_train[:,3] = X_train[:,3]*1.6
 X_train[:,0] = X_train[:,0]*2
 X_train[:,1] = X_train[:,1]*1.2
@@ -135,16 +115,8 @@ for i in xun:
     mean = np.mean(accuracy,axis = 1)
     
     std = np.std(accuracy,axis = 1)
-# =============================================================================
-#     plt.figure(figsize = (50,5))
-#     plot_data = np.array([mean,mean+std,mean-std]).T
-#     plt.plot(plot_data,marker='.')
-#     plt.grid(True)
-# =============================================================================
-    # =============================================================================
     b = mean
     min_acc = np.min(b)
-    # =============================================================================
     index_min = 70 + np.argmin(b)
     print(i,index_min,1-min_acc)
 
